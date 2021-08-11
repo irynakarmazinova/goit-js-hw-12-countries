@@ -1,12 +1,28 @@
-<div class='card'>
-  <h2>{{region}}</h2>
-  <p>Capital: {{subregion}}</p>
-  <p>Population: {{population}}</p>
-  <p>Languages: {{languages}}</p>
-  <ul>
-    {{#each languages}}
-      <li>{{this}}</li>
-    {{/each}}
-  </ul>
-  <img class='flag-img' src='{{flag}}' alt='{{subregion}}' />
-</div>
+{{#each this}}
+
+  <div class='center-box'>
+    <div class='card-box'>
+      <h1 class='visually-hidden'>Country cards</h1>
+      <h2 class='title'>{{region}}</h2>
+
+      <div class='country-box'>
+
+        <div class='country'>
+          <p><span class='bold'>Capital: </span>{{subregion}}</p>
+          <p><span class='bold'>Population: </span>{{population}}</p>
+          <p><span class='bold'>Languages: </span></p>
+          <ul>
+            {{#each languages}}
+              <li>{{name}}</li>
+            {{/each}}
+          </ul>
+        </div>
+
+        <div class='flag'>
+          <img class='flag-img' src='{{flag}}' alt='{{subregion}}' />
+        </div>
+
+      </div>
+    </div>
+  </div>
+{{/each}}

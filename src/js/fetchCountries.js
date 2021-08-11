@@ -2,22 +2,17 @@ var debounce = require('lodash.debounce');
 
 import countryCardTpl from '../templates/country-card.hbs';
 
-const formRef = document.getElementById('form');
 const inputRef = document.getElementById('input');
 const cardContainerRef = document.getElementById('js-card-container');
 
 function onInput(e) {
   e.preventDefault();
 
-  //   const form = e.currentTarget;
-  //   const searchQuery = form.elements.query.value;
-
-  const form = e.target.valuet;
+  const form = e.target.value;
 
   fetchCountryName(form)
-    //   fetchCountryName(searchQuery)
     .then(renderCountryCard)
-    .catch(err => console.log(err));
+    .catch(err => console.error(err));
 }
 inputRef.addEventListener('input', debounce(onInput, 500));
 
@@ -29,6 +24,15 @@ function fetchCountryName(name) {
 }
 
 function renderCountryCard(country) {
+  // if (массив с одной страной) {
+  //     const markup = countryCardTpl(country);
+  // cardContainerRef.innerHTML = markup;
+  // }else if (от 2 - х до 10 - х стран) {
+  //   список имен под инпутом
+  // }else {
+  //   плагин. как установить?
+  // }
+
   const markup = countryCardTpl(country);
   console.log(markup);
 
