@@ -13,7 +13,7 @@ function onSearch(e) {
   e.preventDefault(5);
 
   const form = e.currentTarget;
-  console.log(form.elements);
+  // console.log(form.elements);
 
   // значение инпута во время сабмита формы
   const searchQuery = form.elements.query.value;
