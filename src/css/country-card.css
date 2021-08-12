@@ -1,5 +1,6 @@
 body {
   font-family: 'Atkinson Hyperlegible', sans-serif;
+  color: rgb(47, 47, 47);
 }
 
 img {
@@ -19,6 +20,11 @@ p {
   margin: 0;
 }
 
+ul {
+  margin: 0;
+  padding: 0;
+}
+
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -32,33 +38,72 @@ p {
   clip-path: inset(100%);
 }
 
+/* input */
+.input-box {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
 .input {
-  margin-top: 50px;
-  width: 640px;
-  height: 50px;
+  width: 450px;
+  height: 35px;
   outline: none;
   border: 1px solid rgba(33, 33, 33, 0.2);
   border-radius: 4px;
 }
 
-.center-box {
+.card-container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+/* card-name */
+.country-card-name {
+  margin-left: 30px;
+}
+.card-name-list {
+  list-style-type: '\01F449';
+  /* list-style-type: circle; */
+}
+.card-name-item {
+  padding-left: 10px;
+}
+.card-name-item:not(:last-child) {
+  margin-bottom: 20px;
+}
+
+/* cards */
+.country-card-list {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+
+  margin-right: -30px;
+  margin-bottom: -30px;
+
+  list-style: none;
+}
+.country-card-list:not(:last-child) {
+  margin-bottom: 20px;
+}
+.country-card-item {
+  /* width: 450px; */
+  padding: 20px;
+
+  margin-right: 30px;
+  margin-bottom: 30px;
+  flex-basis: calc(100% / 3 - 30px);
+
+  border: 1px solid rgba(33, 33, 33, 0.2);
+  border-radius: 4px;
 }
 
-.card-box {
-  margin: 50px;
-  padding: 25px;
-  /* border: 1px solid rgba(33, 33, 33, 0.2); */
-  /* width: 700px; */
-}
-
-.title {
+.country-card-title {
   text-align: center;
   font-weight: 700;
-  font-size: 50px;
+  font-size: 30px;
 
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .country-box {
@@ -67,31 +112,40 @@ p {
 
 /* country left */
 .country {
-  margin: 20px;
+  margin-right: 20px;
 
-  font-size: 25px;
+  font-size: 15px;
   font-weight: 400;
 }
 
-p {
-  margin-bottom: 30px;
+.topic {
+  margin-bottom: 20px;
 }
 
-.bold {
+.topic-bold {
   font-weight: 700;
 }
 
-li {
+.language-list {
+  margin: 0 0 0 20px;
+  padding: 0;
+}
+
+.language-item {
   margin-bottom: 10px;
 }
 
 /* img right */
 .flag {
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
+
+  /* overflow: hidden; */
 }
 .flag-img {
-  width: 250px;
-  height: 250px;
+  /* width: 95%; */
+  border: 1px solid rgba(33, 33, 33, 0.2);
+
+  width: 190px;
 }

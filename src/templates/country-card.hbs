@@ -1,6 +1,6 @@
-{{#each this}}
+{{!-- {{#each this}}
 
-  <div class='center-box'>
+  <div class='country-card'>
     <div class='card-box'>
       <h1 class='visually-hidden'>Country cards</h1>
       <h2 class='title'>{{region}}</h2>
@@ -8,12 +8,44 @@
       <div class='country-box'>
 
         <div class='country'>
-          <p><span class='bold'>Capital: </span>{{subregion}}</p>
-          <p><span class='bold'>Population: </span>{{population}}</p>
-          <p><span class='bold'>Languages: </span></p>
-          <ul>
+          <p class='topic'><span class='bold'>Capital: </span>{{subregion}}</p>
+          <p class='topic'><span class='bold'>Population: </span>{{population}}</p>
+          <p class='topic'><span class='bold'>Languages: </span></p>
+          <ul class='language-list'>
             {{#each languages}}
-              <li>{{name}}</li>
+              <li class='language-item'>{{name}}</li>
+            {{/each}}
+          </ul>
+        </div>
+
+        <div class='flag-box'>
+          <img class='flag-img' src='{{flag}}' alt='{{subregion}}' />
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+{{/each}} --}}
+
+<h1 class='visually-hidden'>Country cards</h1>
+
+<ul class='country-card-list'>
+
+  {{#each this}}
+    <li class='country-card-item'>
+      <h2 class='country-card-title'>{{region}}</h2>
+
+      <div class='country-box'>
+
+        <div class='country'>
+          <p class='topic'><span class='topic-bold'>Capital: </span>{{subregion}}</p>
+          <p class='topic'><span class='topic-bold'>Population: </span>{{population}}</p>
+          <p class='topic'><span class='topic-bold'>Languages: </span></p>
+
+          <ul class='language-list'>
+            {{#each languages}}
+              <li class='language-item'>{{name}}</li>
             {{/each}}
           </ul>
         </div>
@@ -23,6 +55,7 @@
         </div>
 
       </div>
-    </div>
-  </div>
-{{/each}}
+    </li>
+  {{/each}}
+
+</ul>
