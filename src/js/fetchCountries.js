@@ -21,14 +21,33 @@ function onInput(e) {
   e.preventDefault();
 
   const form = e.target.value; //запрос который вводят
+  // console.log(inputRef.value === form);
 
-  fetchCountryName(form)
-    .then(data => {
-      renderManipulation(data);
-    })
-    .catch(err => console.error(err));
-  // .finally(() => form.reset()); //очистить инпут после вывода результата-почему ощибка и не находит reset??
-  // ошибка когда стер в инпуте что было
+  // why?????
+  // console.log(form === null); //false
+  // console.log(form === ''); //false
+  // console.log(!form === null); //false
+  // console.log(!form === ''); //false
+
+  if (form === '') {
+    console.log('if');
+
+    error({
+      title: `You haven't entered anything.`,
+      text: `Please enter your request.`,
+      delay: 2500,
+    });
+  } else {
+    console.log('else');
+
+    fetchCountryName(form)
+      .then(data => {
+        renderManipulation(data);
+      })
+      .catch(err => console.error(err));
+    // .finally(() => form.reset()); //очистить инпут после вывода результата-почему ощибка и не находит reset??
+    // ошибка когда стер в инпуте что было - запрос отправляется при изминении инпута и в конце там нет никакого значения
+  }
 }
 inputRef.addEventListener('input', debounce(onInput, 500));
 
@@ -51,6 +70,7 @@ function renderCountryCardName(country) {
   cardContainerRef.innerHTML = markup;
 }
 
+// what markup to render
 function renderManipulation(data) {
   if (data.length > 10) {
     error({
