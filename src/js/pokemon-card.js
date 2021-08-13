@@ -10,7 +10,7 @@ import getRefs from './get-refs';
 const refs = getRefs();
 
 function onSearch(e) {
-  e.preventDefault(5);
+  e.preventDefault();
 
   const form = e.currentTarget;
   // console.log(form.elements);

@@ -1,6 +1,8 @@
+// handlebars
 import countryCardTpl from '../templates/country-card.hbs';
 import countryCardNameTpl from '../templates/country-card-name.hbs';
 
+// lodash
 var debounce = require('lodash.debounce');
 
 // pnotify
@@ -9,11 +11,12 @@ import '@pnotify/core/dist/PNotify.css';
 import * as PNotifyMobile from '@pnotify/mobile';
 import '@pnotify/mobile/dist/PNotifyMobile.css';
 
-import '@pnotify/core/dist/BrightTheme.css';
+import '@pnotify/core/dist/BrightTheme.css'; //color theme for error
 
 defaultModules.set(PNotifyMobile, {});
 
 // refs
+// const formInputRef = document.querySelector('.form-input'); // др.вар. - очистка инпута
 const inputRef = document.getElementById('input');
 const cardContainerRef = document.getElementById('js-card-container');
 
@@ -29,19 +32,14 @@ function onInput(e) {
       .then(data => {
         renderManipulation(data);
       })
-      .catch(err => console.error(err))
-      .finally(() => form.reset()); //очистить инпут после вывода результата-почему ощибка и не находит reset??
-  } else {
-    error({
-      title: `You haven't entered anything.`,
-      text: `Please enter your request.`,
-      delay: 2000,
-    });
+      .catch(err => console.error(err));
+    // .finally(() => formInputRef.reset()); // др.вар. - очистка инпута
   }
 }
 inputRef.addEventListener('input', debounce(onInput, 500));
+// formInputRef.addEventListener('input', debounce(onInput, 500)); // др.вар. - очистка инпута
 
-// функция возвращает результат фетча( - промис) с распарсенными данными
+// функция возвращает результат фетча( - прOмис) с распарсенными данными
 function fetchCountryName(name) {
   return fetch(`https://restcountries.eu/rest/v2/name/${name}`).then(response => {
     return response.json();
@@ -80,29 +78,7 @@ function renderManipulation(data) {
     });
   }
 
-  // switch (
-  //   data.length //не работает, найти ошибку
-  // ) {
-  //   case  > 10:
-  //     error({
-  //       title: `Too many matches found.`,
-  //       text: `We found ${data.length} countries. Please enter a more specific query!`,
-  //       delay: 2500,
-  //     });
-  //     break;
-  //   case  > 2 && data.length < 10:
-  //     renderCountryCardName(data);
-  //     break;
-  //   case  === 1:
-  //     renderCountryCard(data);
-  //     break;
-  //   default:
-  //     or({
-  //       title: `We didn’t find such a country.`,
-  //       text: `Please check the correctness of the data entered and try again.`,
-  //       delay: 2500,
-  //     });
-  // }
+  // switch ?
 }
 
 // --------------------------------------------------------------------------
