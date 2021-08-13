@@ -23,30 +23,20 @@ function onInput(e) {
   const form = e.target.value; //запрос который вводят
   // console.log(inputRef.value === form);
 
-  // why?????
-  // console.log(form === null); //false
-  // console.log(form === ''); //false
-  // console.log(!form === null); //false
-  // console.log(!form === ''); //false
-
-  if (form === '') {
-    console.log('if');
-
-    error({
-      title: `You haven't entered anything.`,
-      text: `Please enter your request.`,
-      delay: 2500,
-    });
-  } else {
-    console.log('else');
-
+  // if (form !== null) { // error
+  if (form !== '') {
     fetchCountryName(form)
       .then(data => {
         renderManipulation(data);
       })
-      .catch(err => console.error(err));
-    // .finally(() => form.reset()); //очистить инпут после вывода результата-почему ощибка и не находит reset??
-    // ошибка когда стер в инпуте что было - запрос отправляется при изминении инпута и в конце там нет никакого значения
+      .catch(err => console.error(err))
+      .finally(() => form.reset()); //очистить инпут после вывода результата-почему ощибка и не находит reset??
+  } else {
+    error({
+      title: `You haven't entered anything.`,
+      text: `Please enter your request.`,
+      delay: 2000,
+    });
   }
 }
 inputRef.addEventListener('input', debounce(onInput, 500));
@@ -76,7 +66,7 @@ function renderManipulation(data) {
     error({
       title: `Too many matches found.`,
       text: `We found ${data.length} countries. Please enter a more specific query!`,
-      delay: 2500,
+      delay: 2000,
     });
   } else if (data.length > 2 && data.length < 10) {
     renderCountryCardName(data);
@@ -86,7 +76,7 @@ function renderManipulation(data) {
     error({
       title: `We didn’t find such a country.`,
       text: `Please check the correctness of the data entered and try again.`,
-      delay: 2500,
+      delay: 2000,
     });
   }
 
