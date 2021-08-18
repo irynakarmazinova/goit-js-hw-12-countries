@@ -19,43 +19,42 @@ defaultModules.set(PNotifyMobile, {});
 const inputRef = document.getElementById('input');
 const cardContainerRef = document.getElementById('js-card-container');
 
-async function onInput(e) {
+function onInput(e) {
   e.preventDefault();
   const form = e.target.value;
 
-  try {
-    if (form !== '') {
-      const names = await fetchCountryName(form);
-      const renderMarcup = await renderManipulation(names);
-    }
-  } catch (error) {
-    console.error(error);
+  if (form !== '') {
+    fetchCountryName(form)
+      .then(data => {
+        renderManipulation(data);
+      })
+      .catch(err => console.error(err));
   }
 }
 inputRef.addEventListener('input', debounce(onInput, 500));
 
 // функция возвращает результат фетча( - прOмис) с распарсенными данными
 async function fetchCountryName(name) {
-  const response = await fetch(`https://restcountries.eu/rest/v2/name/${name}`);
+  const response = await fetch(`https://restcCCCountries.eu/rest/v2/name/${name}`);
   const names = response.json();
   // return await response.json();
   return names;
 }
 
 // render card with all info
-async function renderCountryCard(country) {
+function renderCountryCard(country) {
   const markup = countryCardTpl(country);
   cardContainerRef.innerHTML = markup;
 }
 
 // render only name country
-async function renderCountryCardName(country) {
+function renderCountryCardName(country) {
   const markup = countryCardNameTpl(country);
   cardContainerRef.innerHTML = markup;
 }
 
 // what markup to render
-async function renderManipulation(data) {
+function renderManipulation(data) {
   if (data.length > 10) {
     error({
       title: `Too many matches found.`,
