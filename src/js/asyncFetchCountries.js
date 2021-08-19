@@ -23,21 +23,33 @@ function onInput(e) {
   e.preventDefault();
   const form = e.target.value;
 
+  // try..catch работает только в синхронном коде
+  // так при ошибка -> ошибка - код падает!!!!
+  // try {
+  //   if (form !== '') {
+  //     fetchCountryName(form).then(data => {
+  //       renderManipulation(data);
+  //     });
+  //   }
+  // } catch (e) {
+  //   console.log(e.name + ': ' + e.message);
+  // }
+
+  // так при ошибка -> ошибка - код не падает
   if (form !== '') {
     fetchCountryName(form)
       .then(data => {
         renderManipulation(data);
       })
-      .catch(err => console.error(err));
+      .catch(e => console.log(e.name + ': ' + e.message));
   }
 }
 inputRef.addEventListener('input', debounce(onInput, 500));
 
 // функция возвращает результат фетча( - прOмис) с распарсенными данными
 async function fetchCountryName(name) {
-  const response = await fetch(`https://restcCCCountries.eu/rest/v2/name/${name}`);
-  const names = response.json();
-  // return await response.json();
+  const response = await fetch(`https://restcountries.eu/rest/v2/name/${name}`);
+  const names = await response.json();
   return names;
 }
 
