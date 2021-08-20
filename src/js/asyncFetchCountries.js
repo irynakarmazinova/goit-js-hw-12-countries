@@ -19,6 +19,17 @@ defaultModules.set(PNotifyMobile, {});
 const inputRef = document.getElementById('input');
 const cardContainerRef = document.getElementById('js-card-container');
 
+// при ошибка->ошибка->ошибка - что бы не падал код
+function setError(data) {
+  const now = new Date().valueOf();
+  let endPoint = 0;
+
+  if (now > endPoint) {
+    endPoint = now + data.delay + 1000;
+    return error(data);
+  }
+}
+
 function onInput(e) {
   e.preventDefault();
   const form = e.target.value;
@@ -52,8 +63,8 @@ async function fetchCountryName(name) {
   if (!responce.ok) {
     return new Error('Country not found');
   }
-  const names = responce.json();
 
+  const names = responce.json();
   return names;
 }
 
@@ -72,20 +83,20 @@ function renderCountryCardName(country) {
 // what markup to render
 function renderManipulation(data) {
   if (data.length > 10) {
-    error({
+    setError({
       title: `Too many matches found.`,
       text: `We found ${data.length} countries. Please enter a more specific query!`,
-      delay: 2000,
+      delay: 1000,
     });
   } else if (data.length > 2 && data.length < 10) {
     renderCountryCardName(data);
   } else if (data.length === 1) {
     renderCountryCard(data);
   } else {
-    error({
+    setError({
       title: `We didn’t find such a country.`,
       text: `Please check the correctness of the data entered and try again.`,
-      delay: 2000,
+      delay: 1000,
     });
   }
 }
