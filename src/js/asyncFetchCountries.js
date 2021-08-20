@@ -83,6 +83,8 @@ function renderCountryCardName(country) {
 // what markup to render
 function renderManipulation(data) {
   if (data.length > 10) {
+    cardContainerRef.innerHTML = '';
+
     setError({
       title: `Too many matches found.`,
       text: `We found ${data.length} countries. Please enter a more specific query!`,
@@ -93,6 +95,8 @@ function renderManipulation(data) {
   } else if (data.length === 1) {
     renderCountryCard(data);
   } else {
+    cardContainerRef.innerHTML = '';
+
     setError({
       title: `We didn’t find such a country.`,
       text: `Please check the correctness of the data entered and try again.`,
