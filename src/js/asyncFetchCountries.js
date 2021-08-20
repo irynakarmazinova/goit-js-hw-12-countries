@@ -23,7 +23,6 @@ function onInput(e) {
   e.preventDefault();
   const form = e.target.value;
 
-  // try..catch работает только в синхронном коде
   // так при ошибка -> ошибка - код падает!!!!
   // try {
   //   if (form !== '') {
@@ -48,8 +47,13 @@ inputRef.addEventListener('input', debounce(onInput, 500));
 
 // функция возвращает результат фетча( - прOмис) с распарсенными данными
 async function fetchCountryName(name) {
-  const response = await fetch(`https://restcountries.eu/rest/v2/name/${name}`);
-  const names = await response.json();
+  const responce = await fetch(`https://restcountries.eu/rest/v2/name/${name}`);
+
+  if (!responce.ok) {
+    return new Error('Country not found');
+  }
+  const names = responce.json();
+
   return names;
 }
 
