@@ -30,41 +30,35 @@ function setError(data) {
   }
 }
 
-function onInput(e) {
+async function onInput(e) {
   e.preventDefault();
-  const form = e.target.value;
+  const form = e.target.value.trim();
 
-  // так при ошибка -> ошибка - код падает!!!!
-  // try {
-  //   if (form !== '') {
-  //     fetchCountryName(form).then(data => {
-  //       renderManipulation(data);
-  //     });
-  //   }
-  // } catch (e) {
-  //   console.log(e.name + ': ' + e.message);
-  // }
-
-  // так при ошибка -> ошибка - код не падает
-  if (form !== '') {
-    fetchCountryName(form)
-      .then(data => {
-        renderManipulation(data);
-      })
-      .catch(e => console.log(e.name + ': ' + e.message));
+  try {
+    const data = await fetchCountryName(form);
+    renderManipulation(data);
+  } catch (error) {
+    console.log(error);
   }
+
+  // if (form !== '') {
+  //   fetchCountryName(form)
+  //     .then(data => {
+  //       renderManipulation(data);
+  //     })
+  //     .catch(e => console.log(e.name + ': ' + e.message));
+  // }
 }
 inputRef.addEventListener('input', debounce(onInput, 500));
 
 // функция возвращает результат фетча( - прOмис) с распарсенными данными
 async function fetchCountryName(name) {
-  const responce = await fetch(`https://restcountries.eu/rest/v2/name/${name}`);
-
-  if (!responce.ok) {
+  const response = await fetch(`https://restcountries.eu/rest/v2/name/${name}`);
+  if (!response.ok) {
     return new Error('Country not found');
   }
 
-  const names = responce.json();
+  const names = response.json();
   return names;
 }
 
